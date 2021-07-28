@@ -3,6 +3,17 @@
   align-items: center;
   justify-content: center;
 }
-.content{
-  width: 700px;
+.content {
+  width: 768px;
+  border: 1px solid black;
+  padding: 100px 50px;
+  margin: 20px 0px;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+  }
 }

@@ -2,41 +2,20 @@ import { useState } from 'react'
 import './App.css';
 import GridCreation from './components/grid-creation'
 import DragObstruction from './components/drag-obstruction';
-import SelectWaterFlow from './components/select-water-flow';
-import StartSimulation from './components/start-simulation';
 
 function App() {
   const [activeComp, setActiveCom] = useState("gridCreation")
+  /** set required grid data like number of rows, columns and obstruction */
   const [gridData, setGridData] = useState({ rows: 1, columns: 1, obstructions: 1 })
-  const [obsPosOnGrid, setObsPosOnGrid] = useState({})
-  const [startPoint, setStartPoint] = useState()
 
+  /** component shown on screen */
   const components = {
     "gridCreation": <GridCreation setGridData={setGridData} gridData={gridData} setActiveCom={setActiveCom} />,
     "dragObstruction": <DragObstruction
       gridData={gridData}
       setActiveCom={setActiveCom}
-      obsPosOnGrid={obsPosOnGrid}
-      setObsPosOnGrid={setObsPosOnGrid}
     />,
-    "selectWaterFlow": <SelectWaterFlow
-      gridData={gridData}
-      setActiveCom={setActiveCom}
-      obsPosOnGrid={obsPosOnGrid}
-      startPoint={startPoint}
-      setStartPoint={(value) => {
-        setStartPoint(value);
-        setActiveCom("startSimulation")
-      }}
-    />,
-    "startSimulation": <StartSimulation
-      gridData={gridData}
-      obsPosOnGrid={obsPosOnGrid}
-      startPoint={startPoint}
-    />
   }
-
-
 
   return (
     <div className="App">

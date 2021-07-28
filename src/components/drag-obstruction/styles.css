@@ -3,13 +3,23 @@
   grid-template-columns: auto auto;
   margin-top: 40px;
 }
-
-.obstruction-block {
-  width: 50px;
-  height: 50px;
-  background-color: black;
+.block-size {
+  width: 40px;
+  height: 40px;
 }
-.drag-footer{
+.grey-background {
+  background-color: grey !important;
+}
+.obstruction-block {
+  background-color: black;
+  border: 1px solid black;
+}
+.sub-heading {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.drag-footer {
   display: flex;
   margin-top: 30px;
 }
@@ -18,4 +28,18 @@
 }
 .hovered {
   background-color: gray;
+}
+
+@media screen and (max-width: 768px) {
+  .block-size {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .block-size {
+    width: 20px;
+    height: 20px;
+  }
 }

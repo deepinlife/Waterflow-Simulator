@@ -16,6 +16,16 @@ const obstructions = {};
   obstructions[i] = value;
 });
 
+/**
+ * Display slider
+ * Here user select value through slider
+ * @param {object} title - slider title 
+ * @param {object} marks - total value to display on slider 
+ * @param {function} onChange - trigger on slider change
+ * @param {number} value - slider value 
+ * 
+ * @returns 
+ */
 const RenderSlider = ({ title, marks, onChange, value }) => (
   <div>
     <span>{title}</span>
@@ -33,7 +43,14 @@ const RenderSlider = ({ title, marks, onChange, value }) => (
   </div>
 )
 
-
+/**
+ * Display Grid configuration
+ * Here user set number of rows, columns and obstruction
+ * @param {object} gridData [rows, columns, obstruction] configuration values
+ * @param {function} setGridData - set grid configuration
+ * @param {function} setActiveCom - set active component
+ * @returns 
+ */
 const GridCreation = ({ gridData, setGridData, setActiveCom }) => (
   <div className="grid-creation">
     <h2>Grid Creation</h2>
