@@ -23,21 +23,31 @@ const fillWaterContainer = (obsPosOnGrid, startPoint, rows, columns) => {
   document.getElementById("start-point-row").style.marginBottom = "0px";
 
   function fillWater(currentLocation) {
-    /** check if next block in bottom direction has obstruction or not */
-    if (obs[`${currentLocation[0] + 1}${currentLocation[1]}`]) {
+    /** get id of next row but same column of block */
+    let nextBlockId = (currentLocation[0] + 1 >= 0) && document.getElementById(`${currentLocation[0] + 1}${currentLocation[1]}`)
+    /** check if next row but same column block has obstruction or not and it is filled with water or not */
+    if (obs[`${currentLocation[0] + 1}${currentLocation[1]}`] || (nextBlockId && nextBlockId.style.backgroundColor === 'blue')) {
+      let isGoOnLeftOrRight = false;
+
       let leftBlockId = (currentLocation[1] - 1 >= 0) && document.getElementById(`${currentLocation[0]}${currentLocation[1] - 1}`);
       /** check if left block has no obstruction, not a first block and not filled with water or vice-versa  */
       if (leftBlockId && !obs[`${currentLocation[0]}${currentLocation[1] - 1}`] && leftBlockId.style.backgroundColor !== 'blue') {
         /** change block color */
         leftBlockId.style.backgroundColor = "blue";
+        isGoOnLeftOrRight = true;
         fillWater([currentLocation[0], currentLocation[1] - 1]);
       }
       let rightBlockId = (currentLocation[1] + 1 < columns) && document.getElementById(`${currentLocation[0]}${currentLocation[1] + 1}`)
       /** check if right block has no obstruction, not a last block and not filled with water or vice-versa  */
       if (rightBlockId && !obs[`${currentLocation[0]}${currentLocation[1] + 1}`] && rightBlockId.style.backgroundColor !== 'blue') { // column check
+        isGoOnLeftOrRight = true;
         /** change block color */
         rightBlockId.style.backgroundColor = "blue";
         fillWater([currentLocation[0], currentLocation[1] + 1]);
+      }
+      /** check if water flow not move on left or right then it goes on upward direction */
+      if (!isGoOnLeftOrRight && (currentLocation[0] - 1) >= 0) {
+        fillWater([currentLocation[0] - 1, currentLocation[1]]);
       }
     }
     else if (currentLocation[0] + 1 < (rows + 1)) { // row check
